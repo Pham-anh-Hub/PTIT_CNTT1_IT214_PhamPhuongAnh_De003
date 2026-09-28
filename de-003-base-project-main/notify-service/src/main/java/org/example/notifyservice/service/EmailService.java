@@ -21,7 +21,7 @@ public class EmailService {
 
     public void sendEnrollmentCreatedEmail(String recipient) {
         if (!StringUtils.hasText(recipient)) {
-            throw new IllegalArgumentException("Email người nhận không được để trống");
+            throw new IllegalArgumentException("Email người nhận không được trống");
         }
         if (!StringUtils.hasText(from)) {
             throw new IllegalStateException("Chưa cấu hình MAIL_FROM hoặc MAIL_USERNAME");

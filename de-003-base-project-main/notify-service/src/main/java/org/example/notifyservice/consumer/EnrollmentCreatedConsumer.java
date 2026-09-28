@@ -21,7 +21,7 @@ public class EnrollmentCreatedConsumer {
     @KafkaListener(topics = "enrollment-created")
     public void consume(String email) {
         if (!StringUtils.hasText(email)) {
-            log.warn("Bỏ qua sự kiện enrollment có email rỗng");
+            log.warn("Bỏ qua sự kiện enrollment có email rỗng, vui lòng kiểm tra lại");
             return;
         }
         log.info("Nhận sự kiện tạo enrollment thành công cho email: {}", email);
