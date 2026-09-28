@@ -26,18 +26,41 @@ public class CourseServiceApplication {
     }
 
 
-//    @Bean
-//    public CommandLineRunner runner(){
-//        return args -> {
-//            List<Course> courses = List.of(
-//                    new Course(1L,"Course 1", "Course so 01", BigDecimal.valueOf(1200000), 10),
-//                    new Course(2L,"Course 2", "Course so 02", BigDecimal.valueOf(1500000), 10),
-//                    new Course(3L,"Course 3", "Course so 03", BigDecimal.valueOf(2100000), 10)
-//            );
-//
-//            courseRepository.saveAll(courses);
-//        };
-//    }
+    @Bean
+    public CommandLineRunner initData(CourseRepository courseRepository) {
+        return args -> {
+            // Kiểm tra database rỗng thì mới thêm dữ liệu mẫu để tránh duplicate khi restart
+            if (courseRepository.count() == 0) {
+                Course course1 = new Course(
+                        1L,
+                        "Lập trình Java Spring Boot",
+                        "Khóa học xây dựng Microservices",
+                        new BigDecimal("1500000"),
+                        50
+                );
+
+                Course course2 = new Course(
+                        2L,
+                        "Cấu trúc dữ liệu và giải thuật",
+                        "Khóa học nền tảng cho sinh viên IT",
+                        new BigDecimal("800000"),
+                        100
+                );
+
+                Course course3 = new Course(
+                        3L,
+                        "Phân tích thiết kế hệ thống",
+                        "Hướng dẫn vẽ UML và Design Pattern",
+                        new BigDecimal("1200000"),
+                        30
+                );
+
+                // Lưu tất cả vào database
+                courseRepository.saveAll(List.of(course1, course2, course3));
+                System.out.println("Đã lưu dữ liệu mẫu Course thành công!");
+            }
+        };
+    }
 
 
 }
